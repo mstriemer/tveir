@@ -4,6 +4,17 @@
         <title>Tveir</title>
     </head>
     <body>
+        <input type="text" data-bind="title" placeholder="The title" class="one">
+        <input type="text" data-bind="title" placeholder="The same title" class="two">
+        <h1 data-bind="title" class="one"></h1>
+        <h1 data-bind="title" class="two"></h1>
+        <button class="alert">Alert!</button>
         <script src="/js/tveir.js"></script>
+        <script>
+            document.querySelector('.alert')
+                    .addEventListener('click', function (e) {
+                alert(JSON.stringify(myObject));
+            });
+        </script>
     </body>
 </html>
