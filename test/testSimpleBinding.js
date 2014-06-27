@@ -23,7 +23,7 @@ describe('a simple binding', function () {
 
     it('supports mutliple inputs and outputs', function () {
         var obj = {};
-        var in1 = document.createElement('input');
+        var in1 = window.document.createElement('input');
         var in2 = document.createElement('input');
         var out1 = document.createElement('p');
         var out2 = document.createElement('p');
@@ -36,5 +36,28 @@ describe('a simple binding', function () {
         expect(out1.innerText).toEqual('new value!');
         expect(out2.innerText).toEqual('new value!');
         expect(in2.value).toEqual('new value!');
+    });
+
+    it('does not set the value for unbound inputs', function () {
+        var obj = {};
+        var input = document.createElement('input');
+        var output = document.createElement('p');
+        tveir.bind(obj, 'later', [output], []);
+        expect(output.innerText).toEqual('');
+        input.value = 'something else';
+        input.dispatchEvent(new Event('change'));
+        expect(output.innerText).toEqual('');
+    });
+
+    it('can add an input binding later', function () {
+        var obj = {};
+        var input = document.createElement('input');
+        var output = document.createElement('p');
+        tveir.bind(obj, 'later', [output], []);
+        expect(output.innerText).toEqual('');
+        tveir.addInput(obj, 'later', input);
+        input.value = 'later value';
+        input.dispatchEvent(new Event('change'));
+        expect(output.innerText).toEqual('later value');
     });
 });
