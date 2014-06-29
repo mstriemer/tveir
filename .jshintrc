@@ -1,0 +1,5 @@
+{
+    "undef": false,
+    "unused": true,
+    "predef": ["document", "describe", "it", "expect", "tveir", "KeyboardEvent", "Event", "window"]
+}
